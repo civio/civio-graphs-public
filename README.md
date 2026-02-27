@@ -4,6 +4,5 @@
 
 ## Directory
 
-| Chart | Description | Stack |
-|-------|-------------|-------|
-
+| Chart | Description | Stack | Published |
+|-------|-------------|-------|-----------|
