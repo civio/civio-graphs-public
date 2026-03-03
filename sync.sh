@@ -11,7 +11,7 @@ set -euo pipefail
 
 PRIVATE_REPO="https://github.com/civio/civio-graphs.git"
 PUBLIC_REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
-TMPDIR_BASE="${TMPDIR:-/tmp}"
+TMPDIR_BASE="${TMPDIR:-/tmp/}"
 CLONE_DIR="$(mktemp -d "${TMPDIR_BASE}civio-graphs-sync.XXXXXX")"
 
 cleanup() {
