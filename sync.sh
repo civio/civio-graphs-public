@@ -5,11 +5,14 @@
 #
 # Usage:  ./sync.sh
 #
-# Requires: git, rsync, and SSH access to both repos.
+# Requires: git, rsync, and GITHUB_TOKEN env var with push access to the public repo.
 
 set -euo pipefail
 
+: "${GITHUB_TOKEN:?GITHUB_TOKEN is not set}"
+
 PRIVATE_REPO="https://github.com/civio/civio-graphs.git"
+PUBLIC_PUSH_URL="https://x-access-token:${GITHUB_TOKEN}@github.com/civio/civio-graphs-public.git"
 PUBLIC_REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
 TMPDIR_BASE="${TMPDIR:-/tmp/}"
 CLONE_DIR="$(mktemp -d "${TMPDIR_BASE}civio-graphs-sync.XXXXXX")"
@@ -62,6 +65,6 @@ if git diff --cached --quiet; then
   echo "No changes to commit."
 else
   git commit -m "Sync published visualizations ($(date -u +%Y-%m-%d))"
-  git push
+  git push "$PUBLIC_PUSH_URL" main
   echo "Changes pushed."
 fi
