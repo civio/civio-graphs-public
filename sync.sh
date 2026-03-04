@@ -65,6 +65,6 @@ if git diff --cached --quiet; then
   echo "No changes to commit."
 else
   git commit -m "Sync published visualizations ($(date -u +%Y-%m-%d))"
-  git push "$PUBLIC_PUSH_URL" main
+  git -c credential.helper= push "$PUBLIC_PUSH_URL" main
   echo "Changes pushed."
 fi
