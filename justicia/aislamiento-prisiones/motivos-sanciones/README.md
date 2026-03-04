@@ -1,4 +1,4 @@
-# Motivos de sanciones de aislamiento
+# Isolation Sanction Reasons
 
 Interactive square-packing visualization showing prison isolation sanctions by disciplinary reason code (2020-2025). Concentric year rings per motivo, filterable by administration (AGE, Cataluña) and gender. Sanctions are classified as violent vs non-violent with 18 distinct reason codes.
 
@@ -7,7 +7,12 @@ Interactive square-packing visualization showing prison isolation sanctions by d
 ## Live preview
 
 **Dataviz URL**: https://graphs.civio.es/justicia/aislamiento-prisiones/motivos-sanciones/dist
+
 **Investigation URL**: https://civio.es/justicia/2026/03/04/aislamiento-el-castigo-en-prision-que-viola-todas-las-recomendaciones-de-la-onu/
+
+## Languages
+
+- Spanish
 
 ## Stack
 

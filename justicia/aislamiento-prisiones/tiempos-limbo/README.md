@@ -1,4 +1,4 @@
-# Tiempos en limbo
+# Time in Limbo
 
 Canvas-based waffle chart visualizing how long inmates spend in isolation in Spanish prisons. Shows 7,800 cases distributed across 5 duration groups, with the UN-recommended 15-day maximum highlighted. Supports grouped and expanded detail views.
 
@@ -9,6 +9,10 @@ Canvas-based waffle chart visualizing how long inmates spend in isolation in Spa
 **Dataviz URL**: https://graphs.civio.es/justicia/aislamiento-prisiones/tiempos-limbo/dist
 
 **Investigation URL**: https://civio.es/justicia/2026/03/04/aislamiento-el-castigo-en-prision-que-viola-todas-las-recomendaciones-de-la-onu/
+
+## Languages
+
+- Spanish
 
 ## Stack
 
