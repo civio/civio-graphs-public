@@ -1,0 +1,36 @@
+{
+	"name": "tiempos-limbo",
+	"private": true,
+	"civio": {
+		"appId": "tiempos-limbo",
+		"projectPath": "justicia/aislamiento-prisiones/tiempos-limbo",
+		"investigationUrl": "https://civio.es/justicia/2026/03/04/aislamiento-el-castigo-en-prision-que-viola-todas-las-recomendaciones-de-la-onu/"
+	},
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"preview": "vite preview",
+		"format": "prettier --write .",
+		"format:check": "prettier --check .",
+		"iframe": "node generate-breakpoints.js",
+		"lint": "oxlint src -c oxlint.json",
+		"lint:deps": "knip",
+		"lint:fix": "oxlint src -c oxlint.json --fix",
+		"lint:all": "npm run lint && npm run lint:deps"
+	},
+	"devDependencies": {
+		"@e18e/eslint-plugin": "^0.1.4",
+		"@sveltejs/vite-plugin-svelte": "^6.2.4",
+		"d3": "^7.9.0",
+		"knip": "^5.82.1",
+		"oxlint": "^1.43.0",
+		"playwright": "^1.57.0",
+		"prettier": "^3.8.1",
+		"prettier-plugin-svelte": "^3.4.1",
+		"svelte": "^5.49.1",
+		"svelte-render-scan": "^1.1.0",
+		"vite": "^7.3.1"
+	}
+}

@@ -41,10 +41,10 @@
 
   $effect(() => {
     if (tooltipEl) {
-      tooltipEl.focus();
+      tooltipEl.focus({ preventScroll: true });
     }
     return () => {
-      previouslyFocused?.focus?.();
+      previouslyFocused?.focus?.({ preventScroll: true });
     };
   });
 </script>
