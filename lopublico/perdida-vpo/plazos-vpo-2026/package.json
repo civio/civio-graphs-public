@@ -1,0 +1,39 @@
+{
+  "name": "plazos-vpo-2026",
+  "civio": {
+    "appId": "plazos-vpo-2026",
+    "projectPath": "lopublico/perdida-vpo/plazos-vpo-2026",
+    "investigationUrl": "https://civio.es/lo-publico/2026/05/21/en-2031-habra-pasado-al-mercado-libre-al-menos-la-mitad-del-millon-y-medio-de-viviendas-protegidas-construidas-desde-1991/",
+    "languages": [
+      "es"
+    ]
+  },
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "iframe": "node generate-breakpoints.js",
+    "iframe:public": "node generate-breakpoints.js --public",
+    "lint": "oxlint src -c oxlint.json",
+    "lint:deps": "knip",
+    "lint:fix": "oxlint src -c oxlint.json --fix",
+    "lint:all": "npm run lint && npm run lint:deps"
+  },
+  "devDependencies": {
+    "@e18e/eslint-plugin": "^0.1.4",
+    "@sveltejs/vite-plugin-svelte": "^6.2.4",
+    "d3": "^7.9.0",
+    "knip": "^5.82.1",
+    "oxlint": "^1.43.0",
+    "playwright": "^1.57.0",
+    "prettier": "^3.8.1",
+    "prettier-plugin-svelte": "^3.4.1",
+    "svelte": "^5.53.5",
+    "vite": "^7.3.1"
+  }
+}
