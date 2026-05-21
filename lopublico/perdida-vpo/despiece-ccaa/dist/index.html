@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" href="https://civio.es/assets/main.min.css?x" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i|Merriweather:300,300i,400,400i,700,700i&display=swap" />
+	<link rel="icon" type="image/png" sizes="32x32" href="./civio.png" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="Visualización de datos interactiva de Civio" />
+	<title>Despiece por CCAA - Pérdida de VPO</title>
+  <script type="module" crossorigin src="./assets/index.js?v=1779344100591"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index.css?v=1779344100591">
+</head>
+
+<body class="lopublico">
+	<div class="post-content" style="margin-top: 0; margin-bottom: 0">
+		<div class="full-width" style="margin-top: 0; margin-bottom: 0; padding: 0 5px">
+			<div id="despiece-ccaa" style="opacity: 0">
+				<section data-ccaa="andalucia">
+					<div area-chart></div>
+					<div laws-chart></div>
+				</section>
+				<section data-ccaa="aragon">
+					<div area-chart></div>
+					<div laws-chart></div>
+				</section>
+				<section data-ccaa="asturias">
+					<div area-chart></div>
+					<div laws-chart></div>
+				</section>
+				<section data-ccaa="baleares">
+					<div area-chart></div>
+					<div laws-chart></div>
+				</section>
+				<section data-ccaa="canarias">
+					<div area-chart></div>
+					<div laws-chart></div>
+				</section>
+				<section data-ccaa="cantabria">
+					<div area-chart></div>
+					<div laws-chart></div>
+				</section>
+				<section data-ccaa="castillalamancha">
+					<div area-chart></div>
+					<div laws-chart></div>
+				</section>
+				<section data-ccaa="castillayleon">
+					<div area-chart></div>
+					<div laws-chart></div>
+				</section>
+				<section data-ccaa="cataluna">
+					<div area-chart></div>
+					<div laws-chart></div>
+				</section>
+				<section data-ccaa="ceuta">
+					<div area-chart></div>
+					<div laws-chart></div>
+				</section>
+				<section data-ccaa="extremadura">
+					<div area-chart></div>
+					<div laws-chart></div>
+				</section>
+				<section data-ccaa="galicia">
+					<div area-chart></div>
+					<div laws-chart></div>
+				</section>
+				<section data-ccaa="larioja">
+					<div area-chart></div>
+					<div laws-chart></div>
+				</section>
+				<section data-ccaa="madrid">
+					<div area-chart></div>
+					<div laws-chart></div>
+				</section>
+				<section data-ccaa="melilla">
+					<div area-chart></div>
+					<div laws-chart></div>
+				</section>
+				<section data-ccaa="murcia">
+					<div area-chart></div>
+					<div laws-chart></div>
+				</section>
+				<section data-ccaa="navarra">
+					<div area-chart></div>
+					<div laws-chart></div>
+				</section>
+				<section data-ccaa="paisvasco">
+					<div area-chart></div>
+					<div laws-chart></div>
+				</section>
+				<section data-ccaa="valencia">
+					<div area-chart></div>
+					<div laws-chart></div>
+				</section>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Replica en local la lógica de civio.es/assets/chunks/article.js
+	     para que el wrapper .full-width se vea idéntico al de producción -->
+	<script>
+		(function () {
+			function applyFullWidth() {
+				var sb = window.innerWidth - document.body.clientWidth;
+				var w = 'calc(100vw - ' + sb + 'px)';
+				document.querySelectorAll('.full-width').forEach(function (el) {
+					el.style.width = w;
+				});
+			}
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', applyFullWidth);
+			} else {
+				applyFullWidth();
+			}
+			window.addEventListener('resize', applyFullWidth);
+		})();
+	</script>
+</body>
+
+</html>
