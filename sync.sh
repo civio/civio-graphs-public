@@ -25,6 +25,10 @@ trap cleanup EXIT
 echo "Cloning private repo into $CLONE_DIR ..."
 git clone "$PRIVATE_REPO" "$CLONE_DIR"
 
+# Update the public repo before touching its working tree; pulling later
+# would fail (rebase/merge refuse to run once changes are staged).
+git -C "$PUBLIC_REPO_DIR" pull origin main
+
 # Collect folders that contain a .published marker file (at any depth).
 published_dirs=()
 while IFS= read -r marker; do
@@ -64,7 +68,6 @@ git add -A
 if git diff --cached --quiet; then
   echo "No changes to commit."
 else
-  git pull origin main
   git commit -m "Sync published visualizations ($(date -u +%Y-%m-%d))"
   git -c credential.helper= push "$PUBLIC_PUSH_URL" main
   echo "Changes pushed."
