@@ -27,7 +27,7 @@ git clone "$PRIVATE_REPO" "$CLONE_DIR"
 
 # Update the public repo before touching its working tree; pulling later
 # would fail (rebase/merge refuse to run once changes are staged).
-git -C "$PUBLIC_REPO_DIR" pull origin main
+git -C "$PUBLIC_REPO_DIR" pull --rebase origin main
 
 # Collect folders that contain a .published marker file (at any depth).
 published_dirs=()
