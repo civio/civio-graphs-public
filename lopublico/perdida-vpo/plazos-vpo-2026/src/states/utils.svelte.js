@@ -26,6 +26,8 @@ class UrlInfo {
   lang = $derived(this.url.searchParams?.get('lang'));
   a11y = $derived(this.url.searchParams?.has('a11y'));
   alt = $derived(this.url.searchParams?.has('alt'));
+  // Dossier/PDF mode: render all rows pre-expanded, no tooltip, no toggle.
+  print = $derived(this.url.searchParams?.has('print'));
 }
 
 export const urlInfo = new UrlInfo();

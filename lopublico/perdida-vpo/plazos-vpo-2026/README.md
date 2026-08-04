@@ -28,6 +28,10 @@ This way the screen-reader user first gets a mental map of the chart, then walks
 
 Debug mode: `?a11y` / `data-a11y` reveals the `sr-only` content, paints `aria-label`s on landmarks and lowers opacity for `aria-hidden` elements.
 
+## Print / dossier mode
+
+`?print=true` renders a static version with every row already expanded (no clicks or tooltips). Under `@media print` the label column widens and housing-type names wrap instead of truncating, so they stay legible on paper. Used by the civio-jekyll dossier PDF pipeline.
+
 ## Development
 
 Requires Node v24.13.0.

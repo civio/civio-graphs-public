@@ -28,6 +28,10 @@ On load, the reader's region is detected by IP (`get.geojs.io`, 2.5 s timeout); 
 
 Each CCAA section is a `region` landmark labelled by its heading. Charts ship with a `ScreenReaderDescription` generated from the data, and the embed accepts `data-a11y` / `data-alt` overrides (equivalent to `?a11y` / `?alt`). Cross-CCAA crossfades fall back to a plain swap under `prefers-reduced-motion: reduce`, and prev/next navigation is keyboard-accessible (←/→).
 
+## Print / dossier mode
+
+`?print=true` mounts all 19 CCAAs at once and stacks them statically (no selector, nav or view transitions), each with its two charts. Used by the civio-jekyll dossier PDF pipeline, which prints one community per page.
+
 ## Development
 
 Requires Node v24.13.0.

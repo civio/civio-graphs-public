@@ -3,7 +3,7 @@
   import { thresholds, permanentColor, diagonalGradient } from './colorScale.js';
   import { vizLang } from '../../states/language.svelte.js';
   import TouchIcon from '../TouchIcon.svelte';
-  import { isMobile } from '../../states/utils.svelte.js';
+  import { isMobile, urlInfo } from '../../states/utils.svelte.js';
 
   const introSubs = $derived(
     vizLang.texts.intro.exampleTypes.map((label, i) => {
@@ -40,10 +40,12 @@
     </div>
   </div>
 
-  <p class="subtitle">
-    <TouchIcon variant="light" />
-    {vizLang.texts.intro.subtitle(isMobile.current)}
-  </p>
+  {#if !urlInfo.print}
+    <p class="subtitle">
+      <TouchIcon variant="light" />
+      {vizLang.texts.intro.subtitle(isMobile.current)}
+    </p>
+  {/if}
 </div>
 
 <style>

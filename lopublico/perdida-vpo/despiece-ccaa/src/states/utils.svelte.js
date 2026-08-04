@@ -31,13 +31,16 @@ class UrlInfo {
 	lang = $derived(this.url.searchParams?.get('lang'));
 	a11y = $derived(this.url.searchParams?.has('a11y') || this.attrA11y);
 	alt = $derived(this.url.searchParams?.has('alt') || this.attrAlt);
+	// Dossier/PDF mode: render all CCAAs stacked, no selector, no nav.
+	print = $derived(this.url.searchParams?.has('print'));
 	// Debug: force ccaa detection mode ('ip' | 'random' | 'manual')
 	mode = $derived(this.url.searchParams?.get('mode'));
 	// Single-chart embed: ?ccaa=<id>&chart=area|laws
 	embedCcaa = $derived(this.url.searchParams?.get('ccaa'));
 	embedChart = $derived(this.url.searchParams?.get('chart'));
 	isEmbed = $derived(
-		!!(this.embedCcaa && (this.embedChart === 'area' || this.embedChart === 'laws'))
+		!this.print &&
+			!!(this.embedCcaa && (this.embedChart === 'area' || this.embedChart === 'laws'))
 	);
 }
 

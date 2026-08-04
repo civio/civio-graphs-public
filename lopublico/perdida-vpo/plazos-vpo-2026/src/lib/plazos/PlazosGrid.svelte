@@ -28,7 +28,7 @@
 <div class="wrapper" aria-hidden="true">
   <div class="grid" role="table" aria-label={vizLang.texts.chart.ariaLabel}>
     {#each rowsView as { row, subs, gradient } (row.name)}
-      {@const isExpanded = expandedName === row.name}
+      {@const isExpanded = expandedName === row.name || expandedName === '__all__'}
       <div class={['plazos-grid-row', isExpanded && 'expanded']} data-scope={row.scope}>
         <button
           class={['label', row.scope === 'estatal' && 'estatal']}
@@ -357,6 +357,45 @@
 
       .sub-label {
         padding: 0 4px 0 12px;
+      }
+    }
+
+    /* Dossier/print: give the label column more room and let housing-type
+       names wrap instead of truncating with an ellipsis, so they're fully
+       legible on paper (no hover/title tooltip available in a PDF). */
+    @media print {
+      .grid {
+        grid-template-columns: 210px 1fr;
+      }
+
+      .sub-text {
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+      }
+
+      /* Compactar un poco la vertical para que el gráfico + la
+         fuente/metodología quepan en una sola hoja A4 (se salía por muy poco).
+         Recorte suave: lo justo para ganar la página sin que sobre espacio. */
+      .bar.band {
+        height: 20px !important;
+      }
+
+      .bar {
+        height: 18px !important;
+        margin-block: 0 !important;
+      }
+
+      .subs {
+        padding-block: 4px !important;
+      }
+
+      .label {
+        min-height: 20px !important;
+      }
+
+      .sub-label {
+        min-height: 18px !important;
       }
     }
   }

@@ -12,6 +12,7 @@
 
   // Components
   import ScrollContainer from './lib/ScrollContainer.svelte';
+  import PrintView from './lib/PrintView.svelte';
   import Footer from './lib/footer/Footer.svelte';
 
   // Props
@@ -28,32 +29,52 @@
     vizLang.setLang(urlInfo.lang ?? lang);
     data.loadFromUrl('https://data.civio.es/lopublico/desaparicion-vpo/graficos/journalist.csv');
   });
+
+  // Print/dossier coordination: notify the page-level `window.__chartReady`
+  // (installed by the Jekyll loader) once data is in and the layout has had a
+  // couple of frames to settle. Puppeteer waits for this signal before
+  // capturing the PDF. Fires at most once.
+  let chartReadySignaled = false;
+  $effect(() => {
+    if (!urlInfo.print || chartReadySignaled) return;
+    if (data.loading || !data.value) return;
+    chartReadySignaled = true;
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => window.__chartReady?.(chartID))
+    );
+  });
 </script>
 
 <div class:a11y-debug={isA11yDebugMode} class={!urlInfo.isCivio ? appArea : ''}>
-  <div class:post-content={!urlInfo.isCivio} style="max-width: none;">
-    <div class={!urlInfo.isCivio ? 'multimedia full-width' : ''}>
-      <div style="max-width: 800px; margin: 0 auto; padding: 10px;">
+  <div class:post-content={!urlInfo.isCivio && !urlInfo.print} style="max-width: none;">
+    <div class={!urlInfo.isCivio && !urlInfo.print ? 'multimedia full-width' : ''}>
+      <div style="max-width: {urlInfo.print ? '100%' : '800px'}; margin: 0 auto; padding: 10px;">
         <!-- reactive data example -->
         <h4>{vizLang.texts.title}</h4>
-        <p class="subtitle" aria-hidden="true">
-          {vizLang.texts.scrollHint}
-          <svg
-            class="scroll-arrow"
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M6 9l6 6 6-6" />
-          </svg>
-        </p>
+        {#if !urlInfo.print}
+          <p class="subtitle" aria-hidden="true">
+            {vizLang.texts.scrollHint}
+            <svg
+              class="scroll-arrow"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </p>
+        {/if}
         {#if !data.loading}
-          <ScrollContainer {isAltMode} />
+          {#if urlInfo.print}
+            <PrintView />
+          {:else}
+            <ScrollContainer {isAltMode} />
+          {/if}
         {/if}
         <Footer {chartID} />
       </div>

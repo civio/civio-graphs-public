@@ -44,6 +44,9 @@
   const headerText = $derived(
     data.kind === 'sub' ? (vizLang.texts.ccaas[data.ccaa] ?? data.ccaa) : data.entry.category
   );
+  const subLabelText = $derived(
+    data.kind === 'sub' ? (vizLang.texts.housingTypes?.[data.ccaa]?.[data.label] ?? data.label) : null
+  );
 
   const isCurrentSub = $derived(data.kind === 'sub' && data.endYear === lastYear);
   const subStatusText = $derived.by(() => {
@@ -113,7 +116,7 @@
 
     <p class="info-row">
       <span class="icon" aria-hidden="true">🏠</span>
-      {data.label}
+      {subLabelText}
     </p>
 
     <p class="info-row protection">

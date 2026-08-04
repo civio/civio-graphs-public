@@ -29,10 +29,13 @@ export function getCcaaPlazosA11y(
 	const lastPeriod = periods[periods.length - 1];
 	const currentSubs = lastPeriod?.subs ?? [];
 
+	const translateLabel = (label) =>
+		vizLang.texts.housingTypes?.[row.name]?.[label] ?? label;
+
 	const periodsCount = periods.length;
 	const currentTypesText =
 		currentSubs.length > 0
-			? currentSubs.map((s) => `${s.label} (${formatProtection(s)})`).join('; ')
+			? currentSubs.map((s) => `${translateLabel(s.label)} (${formatProtection(s)})`).join('; ')
 			: copy.noCurrent;
 
 	// Legislation entries visible in the chart (endYear within or after firstYear),
@@ -66,7 +69,7 @@ export function getCcaaPlazosA11y(
 		for (const sub of period.subs ?? []) {
 			periodsItems.push([
 				periodLabel,
-				sub.label,
+				translateLabel(sub.label),
 				formatProtection(sub),
 				sub.note ?? '',
 			]);

@@ -1,9 +1,9 @@
 # Reporte de iframes per-chart
-**Fecha:** 2026-05-20T16:18:41.782Z
+**Fecha:** 2026-05-22T13:59:33.743Z
 
 ---
 
-## andalucia · area (es)
+## andalucia · area (ga)
 
 ### Todas las medidas
 
@@ -35,7 +35,7 @@
 
 ---
 
-## andalucia · laws (es)
+## andalucia · laws (ga)
 
 ### Todas las medidas
 
@@ -69,7 +69,7 @@
 
 ---
 
-## aragon · area (es)
+## aragon · area (ga)
 
 ### Todas las medidas
 
@@ -101,7 +101,7 @@
 
 ---
 
-## aragon · laws (es)
+## aragon · laws (ga)
 
 ### Todas las medidas
 
@@ -135,7 +135,7 @@
 
 ---
 
-## asturias · area (es)
+## asturias · area (ga)
 
 ### Todas las medidas
 
@@ -167,7 +167,7 @@
 
 ---
 
-## asturias · laws (es)
+## asturias · laws (ga)
 
 ### Todas las medidas
 
@@ -201,7 +201,7 @@
 
 ---
 
-## baleares · area (es)
+## baleares · area (ga)
 
 ### Todas las medidas
 
@@ -233,7 +233,7 @@
 
 ---
 
-## baleares · laws (es)
+## baleares · laws (ga)
 
 ### Todas las medidas
 
@@ -266,7 +266,7 @@
 
 ---
 
-## canarias · area (es)
+## canarias · area (ga)
 
 ### Todas las medidas
 
@@ -298,7 +298,7 @@
 
 ---
 
-## canarias · laws (es)
+## canarias · laws (ga)
 
 ### Todas las medidas
 
@@ -332,7 +332,7 @@
 
 ---
 
-## cantabria · area (es)
+## cantabria · area (ga)
 
 ### Todas las medidas
 
@@ -364,7 +364,7 @@
 
 ---
 
-## cantabria · laws (es)
+## cantabria · laws (ga)
 
 ### Todas las medidas
 
@@ -398,7 +398,7 @@
 
 ---
 
-## castillalamancha · area (es)
+## castillalamancha · area (ga)
 
 ### Todas las medidas
 
@@ -430,7 +430,7 @@
 
 ---
 
-## castillalamancha · laws (es)
+## castillalamancha · laws (ga)
 
 ### Todas las medidas
 
@@ -463,7 +463,7 @@
 
 ---
 
-## castillayleon · area (es)
+## castillayleon · area (ga)
 
 ### Todas las medidas
 
@@ -495,7 +495,7 @@
 
 ---
 
-## castillayleon · laws (es)
+## castillayleon · laws (ga)
 
 ### Todas las medidas
 
@@ -528,40 +528,39 @@
 
 ---
 
-## cataluna · area (es)
+## cataluna · area (ga)
 
 ### Todas las medidas
 
 | Ancho | Altura | Diferencia |
 |-------|--------|------------|
-| 320px | 1092px | 0px |
-| 375px | 945px | -147px |
-| 425px | 895px | -50px |
-| 550px | 859px | -36px |
-| 570px | 807px | -52px |
-| 600px | 795px | -12px |
-| 660px | 795px | 0px |
-| 768px | 732px | -63px |
-| 800px | 733px | +1px |
-| 920px | 736px | +3px |
-| 1024px | 736px | 0px |
-| 1200px | 736px | 0px |
+| 320px | 922px | 0px |
+| 375px | 811px | -111px |
+| 425px | 779px | -32px |
+| 550px | 761px | -18px |
+| 570px | 715px | -46px |
+| 600px | 720px | +5px |
+| 660px | 720px | 0px |
+| 768px | 674px | -46px |
+| 800px | 675px | +1px |
+| 920px | 678px | +3px |
+| 1024px | 678px | 0px |
+| 1200px | 678px | 0px |
 
 ### Breakpoints optimizados
 
 | Ancho | Altura |
 |-------|---------|
-| 320px | 1092px |
-| 375px | 945px |
-| 425px | 895px |
-| 550px | 859px |
-| 570px | 807px |
-| 600px | 795px |
-| 768px | 732px |
+| 320px | 922px |
+| 375px | 811px |
+| 425px | 779px |
+| 550px | 761px |
+| 570px | 715px |
+| 768px | 674px |
 
 ---
 
-## cataluna · laws (es)
+## cataluna · laws (ga)
 
 ### Todas las medidas
 
@@ -595,7 +594,7 @@
 
 ---
 
-## ceuta · area (es)
+## ceuta · area (ga)
 
 ### Todas las medidas
 
@@ -627,7 +626,7 @@
 
 ---
 
-## ceuta · laws (es)
+## ceuta · laws (ga)
 
 ### Todas las medidas
 
@@ -654,7 +653,7 @@
 
 ---
 
-## extremadura · area (es)
+## extremadura · area (ga)
 
 ### Todas las medidas
 
@@ -686,7 +685,7 @@
 
 ---
 
-## extremadura · laws (es)
+## extremadura · laws (ga)
 
 ### Todas las medidas
 
@@ -719,7 +718,7 @@
 
 ---
 
-## galicia · area (es)
+## galicia · area (ga)
 
 ### Todas las medidas
 
@@ -751,7 +750,7 @@
 
 ---
 
-## galicia · laws (es)
+## galicia · laws (ga)
 
 ### Todas las medidas
 
@@ -785,7 +784,7 @@
 
 ---
 
-## larioja · area (es)
+## larioja · area (ga)
 
 ### Todas las medidas
 
@@ -817,7 +816,7 @@
 
 ---
 
-## larioja · laws (es)
+## larioja · laws (ga)
 
 ### Todas las medidas
 
@@ -851,7 +850,7 @@
 
 ---
 
-## madrid · area (es)
+## madrid · area (ga)
 
 ### Todas las medidas
 
@@ -884,7 +883,7 @@
 
 ---
 
-## madrid · laws (es)
+## madrid · laws (ga)
 
 ### Todas las medidas
 
@@ -917,7 +916,7 @@
 
 ---
 
-## melilla · area (es)
+## melilla · area (ga)
 
 ### Todas las medidas
 
@@ -949,7 +948,7 @@
 
 ---
 
-## melilla · laws (es)
+## melilla · laws (ga)
 
 ### Todas las medidas
 
@@ -976,7 +975,7 @@
 
 ---
 
-## murcia · area (es)
+## murcia · area (ga)
 
 ### Todas las medidas
 
@@ -1008,7 +1007,7 @@
 
 ---
 
-## murcia · laws (es)
+## murcia · laws (ga)
 
 ### Todas las medidas
 
@@ -1041,7 +1040,7 @@
 
 ---
 
-## navarra · area (es)
+## navarra · area (ga)
 
 ### Todas las medidas
 
@@ -1073,7 +1072,7 @@
 
 ---
 
-## navarra · laws (es)
+## navarra · laws (ga)
 
 ### Todas las medidas
 
@@ -1107,7 +1106,7 @@
 
 ---
 
-## paisvasco · area (es)
+## paisvasco · area (ga)
 
 ### Todas las medidas
 
@@ -1139,7 +1138,7 @@
 
 ---
 
-## paisvasco · laws (es)
+## paisvasco · laws (ga)
 
 ### Todas las medidas
 
@@ -1173,7 +1172,7 @@
 
 ---
 
-## valencia · area (es)
+## valencia · area (ga)
 
 ### Todas las medidas
 
@@ -1205,7 +1204,7 @@
 
 ---
 
-## valencia · laws (es)
+## valencia · laws (ga)
 
 ### Todas las medidas
 

@@ -215,10 +215,12 @@
       <IntroLegend exampleColor={firstCurrentColor} />
 
       <div class="chart-container" bind:this={chartContainerEl}>
-        <p class="subtitle">
-          <TouchIcon variant="light" />
-          {vizLang.texts.plazosChart.hoverHint(isMobile.current)}
-        </p>
+        {#if !urlInfo.print}
+          <p class="subtitle">
+            <TouchIcon variant="light" />
+            {vizLang.texts.plazosChart.hoverHint(isMobile.current)}
+          </p>
+        {/if}
         <div
           class="grid"
           style:--cols={years.length}

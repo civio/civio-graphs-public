@@ -1,4 +1,4 @@
-# Sanctions by Prison Administration
+# Sanciones por administración penitenciaria
 
 Stacked bar chart comparing solitary confinement sanctions and protective isolation across Spain's three prison administrations (AGE, Catalonia, Basque Country) over time.
 
@@ -9,10 +9,6 @@ Stacked bar chart comparing solitary confinement sanctions and protective isolat
 **Dataviz URL**: https://graphs.civio.es/justicia/aislamiento-prisiones/sanciones-administracion/dist
 
 **Investigation URL**: https://civio.es/justicia/2026/03/04/aislamiento-el-castigo-en-prision-que-viola-todas-las-recomendaciones-de-la-onu/
-
-## Languages
-
-- Spanish
 
 ## Stack
 

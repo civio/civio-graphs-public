@@ -35,6 +35,10 @@ Debug modes via URL params or host attributes:
 
 The `prefers-reduced-motion` preference is honoured for animations.
 
+## Print / dossier mode
+
+`?print=true` swaps the interactive scrollytelling for a static `PrintView`: the six narrative steps are laid out as a fixed grid (no scroll, tweens, tooltips or selector), each with its chart and text. The exploration step lists the four dimensions as a static hint pointing to the online version. Used by the civio-jekyll dossier PDF pipeline.
+
 ## Development
 
 Requires Node v24.13.0.

@@ -22,6 +22,16 @@ class CcaaState {
 	async detectAndSelect() {
 		if (this.sections.length === 0) return;
 
+		// Force the initial CCAA via ?ccaa=<id> (without &chart, which would
+		// trigger single-chart embed mode). Pins the full despiece to this
+		// community instead of IP detection.
+		const requested = urlInfo.embedCcaa;
+		if (requested && this.sections.some((s) => s.id === requested)) {
+			this.selectedId = requested;
+			this.source = 'manual';
+			return;
+		}
+
 		// Debug override via ?mode=ip|random|manual
 		const forced = urlInfo.mode;
 		if (forced === 'random' || forced === 'manual') {

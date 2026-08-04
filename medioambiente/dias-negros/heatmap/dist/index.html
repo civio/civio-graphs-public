@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es" style="overflow-y: auto; scrollbar-gutter: stable">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://civio.es/assets/main.min.css?x" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./civio.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Visualización de datos interactiva de Civio" />
+    <title>Gráfico de Civio</title>
+    <script type="module" crossorigin src="./assets/index.js?v=1785323641008"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index.css?v=1785323641008">
+  </head>
+
+  <body class="medioambiente">
+    <!--
+      Civio article wrappers. On civio.es the chart is injected straight into
+      the article DOM, which already provides these classes; replicating them
+      here makes the standalone/embedded preview match production. App.svelte
+      no longer adds them conditionally.
+    -->
+    <div class="post-content" style="margin-top: 0; margin-bottom: 0">
+      <div class="multimedia full-width" style="margin-top: 0; margin-bottom: 0; padding: 0 5px">
+        <div id="heatmap" style="max-width: 800px; margin: 0 auto"></div>
+      </div>
+    </div>
+
+    <!--
+      Replicates the logic of civio.es/assets/chunks/article.js so the
+      .full-width wrapper breaks out to the full viewport width (minus the
+      scrollbar) exactly like in production. Only matters for full-bleed
+      charts; harmless for content capped at the 800px container above.
+    -->
+    <script>
+      (function () {
+        function applyFullWidth() {
+          var scrollbar = window.innerWidth - document.body.clientWidth;
+          var width = 'calc(100vw - ' + scrollbar + 'px)';
+          document.querySelectorAll('.full-width').forEach(function (el) {
+            el.style.width = width;
+          });
+        }
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', applyFullWidth);
+        } else {
+          applyFullWidth();
+        }
+        window.addEventListener('resize', applyFullWidth);
+      })();
+    </script>
+  </body>
+</html>

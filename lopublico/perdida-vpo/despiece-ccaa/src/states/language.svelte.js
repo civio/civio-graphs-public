@@ -4,8 +4,6 @@ import { ccaaDisplayNames, ccaasWithArticle } from './ccaaCatalog';
 // Comes from https://observablehq.com/@civio/automatizar-traducciones-visualizaciones
 const texts = {
   es: {
-    title: 'Ejemplo de datos reactivos',
-
     // Sources per chart type × scope.
     // Each chart passes the right key to Footer.
     sources: {
@@ -144,11 +142,35 @@ const texts = {
             projectionEnd,
           }) =>
             `Gráfico de áreas apiladas con la evolución del parque de vivienda protegida en ${ccaa} entre 1991 y ${projectionEnd}, desglosado por estado de protección. En ${lastYear}, último año con datos reales, se habían construido ${totalBuilt} viviendas protegidas, de las cuales ${alive} seguían bajo algún tipo de protección${breakdown ? ` (${breakdown})` : ''}${lost ? ` y ${lost} ya la habían perdido (${lostPct} del total construido)` : ''}. A partir de ${lastYear + 1} los valores son una proyección que estima ${projectedBreakdown} en ${projectionEnd}.`,
-          plan: ({ ccaa, totalBuilt, alive, breakdown, lastYear, projectedBreakdown, projectionEnd }) =>
+          plan: ({
+            ccaa,
+            totalBuilt,
+            alive,
+            breakdown,
+            lastYear,
+            projectedBreakdown,
+            projectionEnd,
+          }) =>
             `Gráfico de áreas apiladas con la evolución del parque de vivienda protegida en ${ccaa} entre 1991 y ${projectionEnd}, desglosado por plan. En ${lastYear}, último año con datos reales, se habían construido ${totalBuilt} viviendas protegidas y ${alive} seguían bajo algún tipo de protección${breakdown ? `: ${breakdown}` : ''}. A partir de ${lastYear + 1} los valores son una proyección que estima ${projectedBreakdown} en ${projectionEnd}.`,
-          promotor: ({ ccaa, totalBuilt, alive, breakdown, lastYear, projectedBreakdown, projectionEnd }) =>
+          promotor: ({
+            ccaa,
+            totalBuilt,
+            alive,
+            breakdown,
+            lastYear,
+            projectedBreakdown,
+            projectionEnd,
+          }) =>
             `Gráfico de áreas apiladas con la evolución del parque de vivienda protegida en ${ccaa} entre 1991 y ${projectionEnd}, desglosado por tipo de promoción. En ${lastYear}, último año con datos reales, se habían construido ${totalBuilt} viviendas protegidas y ${alive} seguían bajo algún tipo de protección${breakdown ? `: ${breakdown}` : ''}. A partir de ${lastYear + 1} los valores son una proyección que estima ${projectedBreakdown} en ${projectionEnd}.`,
-          tenencia: ({ ccaa, totalBuilt, alive, breakdown, lastYear, projectedBreakdown, projectionEnd }) =>
+          tenencia: ({
+            ccaa,
+            totalBuilt,
+            alive,
+            breakdown,
+            lastYear,
+            projectedBreakdown,
+            projectionEnd,
+          }) =>
             `Gráfico de áreas apiladas con la evolución del parque de vivienda protegida en ${ccaa} entre 1991 y ${projectionEnd}, desglosado por uso. En ${lastYear}, último año con datos reales, se habían construido ${totalBuilt} viviendas protegidas y ${alive} seguían bajo algún tipo de protección${breakdown ? `: ${breakdown}` : ''}. A partir de ${lastYear + 1} los valores son una proyección que estima ${projectedBreakdown} en ${projectionEnd}.`,
         },
         columns: {
@@ -272,6 +294,319 @@ const texts = {
     // Misma tabla pero con "la" delante para las CCAAs que lo requieren
     // tras preposición (Madrid, Valencia, Murcia). Usar en títulos.
     ccaasWithArticle,
+  },
+  ga: {
+    // Sources per chart type × scope.
+    // Each chart passes the right key to Footer.
+    sources: {
+      ccaaChart:
+        "Fonte: <a href='https://www.mivau.gob.es/el-ministerio/observatorios-y-estadisticas/estadisticas/vivienda-rehabilitacion-protegidas' target='_blank'>Estatísticas de rehabilitación e vivenda protexida</a> do Ministerio de Vivenda e Axenda Urbana e datos achegados polas comunidades autónomas a Civio a través da Lei de Transparencia",
+      plazosChartCcaa:
+        'Fonte: Normativas aprobadas pola comunidade autónoma. Os detalles e ligazóns a cada unha delas están dispoñibles na visualización',
+    },
+    methodology: 'Para saber máis, consulta a nosa ',
+    methodologyLink: 'metodoloxía',
+
+    // Share/embed texts
+    embedViz: 'Inserir',
+    copiedCode: 'Copiado',
+
+    // Accessibility texts
+    shareButton: 'Compartir visualización',
+    closeShare: 'Pechar opcións de compartir',
+    copyEmbed: 'Copiar código para inserir',
+    codeCopied: 'Código copiado ao portapapeis',
+    opensInNewWindow: '(abre en nova xanela)',
+    logoAlt: 'logo Civio',
+    dataListTitle: 'Listado completo de datos',
+
+    ccaaChart: {
+      // Loading / error / empty states
+      loading: 'Cargando…',
+      error: (msg) => `Error: ${msg}`,
+      noData: (ccaa) => `Sen datos para ${ccaa}.`,
+
+      // Visible chart title
+      title: (ccaa) => `Vivendas protexidas en ${ccaa}`,
+
+      // Dimension filter
+      filterLabel: 'Ver por:',
+      filterAriaLegend: 'Ver datos por',
+      dimensions: [
+        { value: 'protection', label: 'Protección' },
+        { value: 'plan', label: 'Plan' },
+        { value: 'promotor', label: 'Promoción' },
+        { value: 'tenencia', label: 'Uso' },
+      ],
+
+      // Hover/touch hint under the number boxes
+      hoverHint: (isMobile) =>
+        `${isMobile ? 'Toca o' : 'Pasa por riba do'} gráfico para veres información en detalle ano por ano.`,
+
+      // Number boxes copy
+      builtCaption: 'VPOs construídas',
+      builtRangePrefix: 'entre 1991 e',
+
+      // Display labels for the stacked areas (legend, tooltip, number boxes).
+      // Keys mirror the stack order in chartConfig.
+      areaLabels: {
+        permanent: 'Protección permanente',
+        protected: 'Protección temporal',
+        maybe: 'Descualificación voluntaria',
+        lost: 'Perdas',
+        estatal: 'Plan estatal',
+        autonomico: 'Plan autonómico',
+        publico: 'Pública',
+        privado: 'Privada',
+        autopromotor: 'Autopromoción',
+        sinAnimoLucro: 'Sen ánimo de lucro',
+        propiedad: 'Propiedade',
+        alquiler: 'Alugueiro',
+        mixto: 'Propiedade ou alugueiro con opción a compra',
+        sinInfo: 'Sen información',
+      },
+      projectionSuffix: ' (proxección)',
+
+      // Screen-reader descriptions + table columns, keyed by dimension
+      a11y: {
+        // Caption for the sr-only data table (longer/more descriptive than the visible h4)
+        title: (ccaa) => `Evolución do parque de vivenda protexida en ${ccaa}`,
+        // Per-view category labels used by mainChart.js to build the breakdown
+        // sentence; zero-valued segments are filtered out to reduce SR noise.
+        breakdownLabels: {
+          protection: {
+            permanent: 'de forma permanente',
+            protected: 'con protección temporal',
+            maybe: 'con posibilidade de descualificación voluntaria',
+          },
+          plan: {
+            estatal: 'proveñen de plans estatais',
+            autonomico: 'de plans autonómicos',
+            sinInfo: 'sen información do plan',
+          },
+          promotor: {
+            publico: 'de promoción pública',
+            privado: 'de promoción privada',
+            autopromotor: 'de autopromoción',
+            sinAnimoLucro: 'de entidades sen ánimo de lucro',
+            sinInfo: 'sen información da promoción',
+          },
+          tenencia: {
+            propiedad: 'en propiedade',
+            alquiler: 'en alugueiro',
+            mixto: 'en alugueiro con opción a compra',
+            sinInfo: 'sen información do uso',
+          },
+        },
+        // Labels for the projection breakdown sentence. Where the wording
+        // matches breakdownLabels exactly (promotor, tenencia) we reuse those
+        // at the call site; protection and plan need different phrasing because
+        // they follow "una proyección que estima…" instead of the parenthetical.
+        projectionLabels: {
+          protection: {
+            permanent: 'con protección permanente',
+            protected: 'con protección temporal',
+            maybe: 'que puideron ser descualificadas voluntariamente de forma anticipada',
+          },
+          plan: {
+            estatal: 'provenientes de plans estatais',
+            autonomico: 'de plans autonómicos',
+            sinInfo: 'sen información do plan',
+          },
+        },
+        // En 'ga' no se usa (esto es solo para periodistas, para meter descripciones alt en RRSS)
+        description: {
+          protection: ({
+            ccaa,
+            totalBuilt,
+            alive,
+            breakdown,
+            lost,
+            lostPct,
+            lastYear,
+            projectedBreakdown,
+            projectionEnd,
+          }) =>
+            `Gráfico de áreas apiladas con la evolución del parque de vivienda protegida en ${ccaa} entre 1991 y ${projectionEnd}, desglosado por estado de protección. En ${lastYear}, último año con datos reales, se habían construido ${totalBuilt} viviendas protegidas, de las cuales ${alive} seguían bajo algún tipo de protección${breakdown ? ` (${breakdown})` : ''}${lost ? ` y ${lost} ya la habían perdido (${lostPct} del total construido)` : ''}. A partir de ${lastYear + 1} los valores son una proyección que estima ${projectedBreakdown} en ${projectionEnd}.`,
+          plan: ({
+            ccaa,
+            totalBuilt,
+            alive,
+            breakdown,
+            lastYear,
+            projectedBreakdown,
+            projectionEnd,
+          }) =>
+            `Gráfico de áreas apiladas con la evolución del parque de vivienda protegida en ${ccaa} entre 1991 y ${projectionEnd}, desglosado por plan. En ${lastYear}, último año con datos reales, se habían construido ${totalBuilt} viviendas protegidas y ${alive} seguían bajo algún tipo de protección${breakdown ? `: ${breakdown}` : ''}. A partir de ${lastYear + 1} los valores son una proyección que estima ${projectedBreakdown} en ${projectionEnd}.`,
+          promotor: ({
+            ccaa,
+            totalBuilt,
+            alive,
+            breakdown,
+            lastYear,
+            projectedBreakdown,
+            projectionEnd,
+          }) =>
+            `Gráfico de áreas apiladas con la evolución del parque de vivienda protegida en ${ccaa} entre 1991 y ${projectionEnd}, desglosado por tipo de promoción. En ${lastYear}, último año con datos reales, se habían construido ${totalBuilt} viviendas protegidas y ${alive} seguían bajo algún tipo de protección${breakdown ? `: ${breakdown}` : ''}. A partir de ${lastYear + 1} los valores son una proyección que estima ${projectedBreakdown} en ${projectionEnd}.`,
+          tenencia: ({
+            ccaa,
+            totalBuilt,
+            alive,
+            breakdown,
+            lastYear,
+            projectedBreakdown,
+            projectionEnd,
+          }) =>
+            `Gráfico de áreas apiladas con la evolución del parque de vivienda protegida en ${ccaa} entre 1991 y ${projectionEnd}, desglosado por uso. En ${lastYear}, último año con datos reales, se habían construido ${totalBuilt} viviendas protegidas y ${alive} seguían bajo algún tipo de protección${breakdown ? `: ${breakdown}` : ''}. A partir de ${lastYear + 1} los valores son una proyección que estima ${projectedBreakdown} en ${projectionEnd}.`,
+        },
+        columns: {
+          protection: [
+            'Ano',
+            'Construídas',
+            'Permanentes',
+            'Temporais',
+            'Descualificación voluntaria',
+            'Perdas',
+          ],
+          plan: [
+            'Ano',
+            'Construídas',
+            'Plan estatal',
+            'Plan autonómico',
+            'Sen información',
+            'Perdas',
+          ],
+          promotor: [
+            'Ano',
+            'Construídas',
+            'Pública',
+            'Privada',
+            'Autopromoción',
+            'Sen ánimo de lucro',
+            'Sen información',
+            'Perdas',
+          ],
+          tenencia: [
+            'Ano',
+            'Construídas',
+            'Propiedade',
+            'Alugueiro',
+            'Alugueiro con opción a compra',
+            'Sen información',
+            'Perdas',
+          ],
+        },
+      },
+    },
+
+    // CCAA selector hints
+    // En ga no se usa
+    selector: {
+      label: 'Comunidad autónoma',
+      hintIp: 'Te mostramos información en detalle sobre tu región ',
+      hintDefault: 'Selecciona aquí la información en detalle sobre cualquier comunidad ',
+      showingYours: 'Selecciona otra',
+      pickOne: 'Selecciona una comunidad o',
+      navigate: 'navega',
+      swipingOr: 'deslizando o',
+      usingArrows: 'usando las flechas',
+    },
+
+    // PlazosChart texts
+    plazosChart: {
+      // En ga no se usa se titleEstatal
+      titleEstatal: 'Plazos de protección y normativa de las VPOs con financiación estatal',
+      titleCcaa: (ccaa) => `Prazos de protección e normativa das VPOs en ${ccaa}`,
+      housingTypesLabel: 'Tipos de vivenda',
+      lawsLabel: 'Lexislación',
+      hoverHint: (isMobile) =>
+        `${isMobile ? 'Toca' : 'Pasa por riba de'} cada tipo de vivenda e lexislación para veres información en detalle`,
+      legend: {
+        yearsTitle: 'Anos de protección',
+        permanent: 'Permanente',
+        // howToRead: 'Cómo leer',
+        howToReadAria:
+          'Como ler: con opacidade plena marca o prazo vixente, atenuado o prazo histórico',
+        historic: 'histórico',
+        current: 'VIXENTE',
+      },
+      tooltip: {
+        since: (year) => `Desde ${year}`,
+        protectionPermanent: { prefix: 'Protección', bold: 'permanente' },
+        protectionYears: (n) => ({ prefix: 'Protección durante', bold: `${n} anos` }),
+        protectionRange: (min, max) => ({
+          prefix: 'Protección entre',
+          bold: `${min} e ${max} anos`,
+        }),
+        viewSource: 'Ver fonte',
+        viewSources: 'Ver fontes:',
+        sourceLabel: (n) => `Fonte ${n}`,
+      },
+    },
+
+    // Navigation
+    // En ga no se usa
+    nav: {
+      prevCcaa: 'Comunidad anterior',
+      nextCcaa: 'Siguiente comunidad',
+      scrollUp: 'Volver arriba',
+      pickOtherCcaa: 'Selecciona otra comunidad',
+    },
+
+    // Accessibility texts (non-chart-specific)
+    a11y: {
+      plazosChart: {
+        description: ({
+          ccaa,
+          firstYear,
+          lastYear,
+          periodsCount,
+          currentTypesText,
+          lawsCount,
+          categoriesCount,
+        }) =>
+          `Liña de tempo coa evolución histórica dos prazos de protección e a normativa das VPO en ${ccaa} entre ${firstYear} e ${lastYear}. Distínguense ${periodsCount} períodos de regulación. En ${lastYear}, os tipos vixentes son: ${currentTypesText}.`,
+        periodsTitle: (ccaa) => `Prazos de protección por período e tipo de vivenda en ${ccaa}`,
+        periodsColumns: ['Período', 'Tipo de vivenda', 'Prazo de protección', 'Notas'],
+        lawsDescription: ({ ccaa, lawsCount, categoriesCount }) =>
+          `Baixo a evolución temporal de tipos de vivenda, complétase a liña de tempo coa evolución histórica da lexislación autonómica. En ${ccaa} temos ${lawsCount} normas e plans asociados ás VPO.`,
+        lawsTitle: (ccaa) => `Normativa asociada ás VPO en ${ccaa}`,
+        lawsColumns: ['Norma', 'Descrición', 'Categoría', 'Vixencia', 'Fontes'],
+        noCurrent: 'sen tipos vixentes',
+      },
+      followingList: 'A continuación tes o listado con todos os detalles.',
+      followingTable: 'A continuación tes a táboa con todos os detalles.',
+    },
+
+    // Display names keyed by the same ids the chart uses (ccaaCatalog ids).
+    // En gallego solo se sobrescribe Galicia → Galiza; el resto se conserva
+    // en español porque la viz solo se va a embeber para Galicia.
+    ccaas: { ...ccaaDisplayNames, galicia: 'Galiza' },
+    // Misma tabla pero con "la" delante para las CCAAs que lo requieren
+    // tras preposición (Madrid, Valencia, Murcia). Usar en títulos.
+    ccaasWithArticle: { ...ccaasWithArticle, galicia: 'Galiza' },
+
+    // Per-CCAA translation of housing-type labels that come literally from the
+    // CSV (sub.label in plazosData). Looked up as
+    // `vizLang.texts.housingTypes?.[ccaa]?.[label] ?? label` so any CCAA or
+    // label not listed falls back to the original CSV string.
+    housingTypes: {
+      galicia: {
+        'En suelo de desarrollo público': 'En solo de desenvolvemento público',
+        Alquiler: 'Alugueiro',
+        'Venta de promoción privada en suelo no desarrollado por la administración pública':
+          'Venda de promoción privada en solo non desenvolvido pola administración pública',
+        'Alquiler en suelo privado': 'Alugueiro en solo privado',
+        'Promoción privada en ámbito territorial de precio máximo superior':
+          'Promoción privada en ámbito territorial de prezo máximo superior',
+        'Promoción privada en zona territorial primera':
+          'Promoción privada en zona territorial primeira',
+        'Promoción privada en zona territorial segunda':
+          'Promoción privada en zona territorial segunda',
+        'Promoción pública en suelo destinado a VPO': 'Promoción pública en solo destinado a VPO',
+        Resto: 'Resto',
+      },
+    },
   },
 };
 

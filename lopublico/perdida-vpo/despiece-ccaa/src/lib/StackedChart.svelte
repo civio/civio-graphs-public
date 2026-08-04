@@ -167,10 +167,12 @@
       />
     </div>
 
-    <p class="subtitle">
-      <TouchIcon variant="light" />
-      {vizLang.texts.ccaaChart.hoverHint(isMobile.current)}
-    </p>
+    {#if !urlInfo.print}
+      <p class="subtitle">
+        <TouchIcon variant="light" />
+        {vizLang.texts.ccaaChart.hoverHint(isMobile.current)}
+      </p>
+    {/if}
 
     {#if a11y}
       <ScreenReaderDescription {...a11y} visible={urlInfo.alt} />

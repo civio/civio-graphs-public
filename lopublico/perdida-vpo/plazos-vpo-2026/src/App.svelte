@@ -28,6 +28,19 @@
     plazosData.load();
     vizLang.setLang(urlInfo.lang ?? lang);
   });
+
+  // Print/dossier coordination: notify `window.__chartReady` once data is in
+  // and a couple of frames have passed so the layout has settled. Puppeteer
+  // waits for this signal before capturing the PDF. Fires at most once.
+  let chartReadySignaled = false;
+  $effect(() => {
+    if (!urlInfo.print || chartReadySignaled) return;
+    if (plazosData.loading || !plazosData.detail) return;
+    chartReadySignaled = true;
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => window.__chartReady?.(chartID))
+    );
+  });
 </script>
 
 <div class={[isA11yDebugMode && 'a11y-debug']}>

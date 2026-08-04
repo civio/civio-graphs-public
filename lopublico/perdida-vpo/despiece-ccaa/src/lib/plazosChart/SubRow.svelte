@@ -1,13 +1,18 @@
 <script>
   import { getContext } from 'svelte';
+  import { vizLang } from '../../states/language.svelte.js';
   import { subBackground, subLabel } from './colorScale.js';
 
   const { row, gridRow } = $props();
   const ctx = getContext('plazosChart');
+
+  const displayLabel = $derived(
+    vizLang.texts.housingTypes?.[row.ccaaName]?.[row.label] ?? row.label
+  );
 </script>
 
 <div class={['label', !row.isCurrent && 'inactive']} style:grid-row={gridRow}>
-  <span class={['text', row.isCurrent && 'current']} title={row.label}>{row.label}</span>
+  <span class={['text', row.isCurrent && 'current']} title={displayLabel}>{displayLabel}</span>
 </div>
 
 <div

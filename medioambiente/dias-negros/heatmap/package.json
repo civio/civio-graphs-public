@@ -1,0 +1,39 @@
+{
+	"name": "heatmap",
+	"civio": {
+		"appId": "heatmap",
+		"projectPath": "medioambiente/dias-negros/heatmap",
+		"investigationUrl": "https://civio.es/medio-ambiente/2026/07/29/las-jornadas-donde-una-sola-provincia-sufrio-mas-de-100-incendios-forestales-a-la-vez/",
+		"languages": [
+			"es"
+		]
+	},
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"preview": "vite preview",
+		"format": "prettier --write .",
+		"format:check": "prettier --check .",
+		"iframe": "node generate-breakpoints.js",
+		"iframe:public": "node generate-breakpoints.js --public",
+		"lint": "oxlint src",
+		"lint:deps": "knip",
+		"lint:fix": "oxlint src --fix",
+		"lint:all": "npm run lint && npm run lint:deps"
+	},
+	"devDependencies": {
+		"@e18e/eslint-plugin": "^0.1.4",
+		"@sveltejs/vite-plugin-svelte": "^6.2.4",
+		"d3": "^7.9.0",
+		"knip": "^6.27.0",
+		"oxlint": "^1.74.0",
+		"playwright": "^1.57.0",
+		"prettier": "^3.8.1",
+		"prettier-plugin-svelte": "^3.4.1",
+		"svelte": "^5.53.5",
+		"vite": "^7.3.1"
+	}
+}

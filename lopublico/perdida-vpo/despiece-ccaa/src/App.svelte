@@ -131,6 +131,16 @@
         block.dataset.ccaaId = s.id;
         block.setAttribute('role', 'region');
         contentContainer.appendChild(block);
+
+        // In print/dossier mode, prepend a prominent CCAA header so each
+        // section is clearly labelled in the PDF.
+        if (urlInfo.print) {
+          const header = document.createElement('h2');
+          header.className = 'ccaa-print-header';
+          header.textContent = s.name;
+          block.appendChild(header);
+        }
+
         block.appendChild(s.element);
         s.blockElement = block;
 
@@ -146,8 +156,9 @@
 
         // Append a scroll-up button after the prose; only visible when the
         // selector is off-screen (so the user always has a way back to it).
-        // Skipped in single-chart embed mode (no selector to scroll back to).
-        if (!embed) {
+        // Skipped in single-chart embed and print/dossier modes (no selector
+        // to scroll back to).
+        if (!embed && !urlInfo.print) {
           const button = mount(ScrollUpButton, {
             target: s.element,
             props: {
@@ -167,10 +178,31 @@
 
     // Pick the user's CCAA by IP, or fall back to random.
     // In embed mode, select the requested CCAA directly (no IP detection).
+    // In print/dossier mode, skip selection entirely and mount charts for
+    // every CCAA so the PDF can render them all stacked.
     if (ccaaSections.length > 0) {
-      if (embed) ccaa.select(embed.ccaa);
+      if (urlInfo.print) {
+        for (const section of ccaaSections) {
+          mountedComponents.push(...mountChartsFor(section));
+        }
+      } else if (embed) ccaa.select(embed.ccaa);
       else await ccaa.detectAndSelect();
     }
+  });
+
+  // Print/dossier coordination: notify `window.__chartReady` once both
+  // datasets are in and a couple of frames have passed so every CCAA has had
+  // time to size its charts. Puppeteer waits for this signal before
+  // capturing the PDF. Fires at most once.
+  let chartReadySignaled = false;
+  $effect(() => {
+    if (!urlInfo.print || chartReadySignaled) return;
+    if (housesData.loading || plazosData.loading) return;
+    if (!housesData.value || !plazosData.detail) return;
+    chartReadySignaled = true;
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => window.__chartReady?.(chartID))
+    );
   });
 
   onDestroy(() => {
@@ -182,8 +214,10 @@
   // Show/hide sections based on selection and swap mounted charts so only the
   // active CCAA carries chart instances. view-transition-name only on the
   // active block so the browser crossfades old→new by matching snapshots.
+  // In print/dossier mode, all sections are mounted and visible upfront, so
+  // there is no swap to drive.
   $effect(() => {
-    if (ccaaSections.length === 0) return;
+    if (ccaaSections.length === 0 || urlInfo.print) return;
     const selectedId = ccaa.selectedId;
 
     if (selectedId && selectedId !== mountedChartsFor.id) {
@@ -204,10 +238,10 @@
 
 </script>
 
-<div class={['app-root', urlInfo.a11y && 'a11y-debug']}>
+<div class={['app-root', urlInfo.a11y && 'a11y-debug', urlInfo.print && 'print-mode']}>
   {#if ccaaSections.length > 0}
     <div class="app-inner">
-      {#if ccaa.sections.length > 1}
+      {#if ccaa.sections.length > 1 && !urlInfo.print}
         <div
           {@attach inView({
             onEnter: () => (selectorInView = true),
@@ -229,6 +263,14 @@
         </div>
       {/if}
 
+      {#if urlInfo.print}
+        <p class="print-intro">
+          Versión imprimible: las 17 comunidades autónomas y 2 ciudades
+          autónomas se muestran apiladas con sus dos gráficos, en lugar del
+          selector interactivo.
+        </p>
+      {/if}
+
       <article
         bind:this={contentContainer}
         class="ccaa-content"
@@ -240,7 +282,7 @@
           onSwipeRight: () => navigate('prev', { focus: true }),
         })}
       >
-        {#if ccaa.sections.length > 1}
+        {#if ccaa.sections.length > 1 && !urlInfo.print}
           <NavButtons
             onprev={() => navigate('prev', { focus: true })}
             onnext={() => navigate('next', { focus: true })}
@@ -463,6 +505,55 @@
   /* Keep the sticky nav buttons above the animating ccaa-block during the transition */
   :global(::view-transition-group(nav-sticky)) {
     z-index: 10;
+  }
+
+  .print-intro {
+    margin: 0 0 1.5rem;
+    padding: 0.6rem 0.9rem;
+    border-left: 3px solid var(--primary, #f74383);
+    background: var(--light, #ffecf6);
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--bw700, #444);
+    border-radius: 3px;
+  }
+
+  /* =========== print / dossier mode =========== */
+
+  /* In dossier mode every CCAA section is mounted and visible. Stack them
+     vertically, separated by a top border — they flow naturally across pages
+     (no forced page break per CCAA). The host dossier CSS applies
+     `break-inside: avoid` to each chart so individual charts never split. */
+  .app-root.print-mode :global(.ccaa-block) {
+    display: block !important;
+    view-transition-name: none !important;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 0;
+    padding: 1.5rem 0 0;
+    border-top: 2px solid var(--bw300, #ccc);
+  }
+
+  .app-root.print-mode :global(.ccaa-block:first-child) {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  .app-root.print-mode :global(.ccaa-print-header) {
+    margin: 0 0 0.5rem;
+    padding: 0.3rem 0.6rem;
+    background: var(--bw100, #f3f3f3);
+    border-left: 4px solid var(--primary, #f74383);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--bw900, #111);
+  }
+
+  @media print {
+    .app-root.print-mode :global(.ccaa-print-header) {
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
   }
 
   /* =========== accesibility =========== */
