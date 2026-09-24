@@ -84,7 +84,6 @@ function classifyRow(row, year) {
 
 	if (isPermanentRow(row)) return 'permanent';
 
-	const min = parseYear(row.min_end_of_protection);
 	const max = parseYear(row.max_end_of_protection);
 	const desc = parseVoluntaryRelease(row.voluntary_release);
 

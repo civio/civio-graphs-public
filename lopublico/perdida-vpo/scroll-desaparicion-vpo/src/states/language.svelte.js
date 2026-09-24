@@ -31,8 +31,9 @@ const texts = {
         projectedPermanent,
         projectedProtected,
         projectedMaybe,
+        projectedLost,
       }) =>
-        `Gráfico de áreas apiladas con la evolución del parque de vivienda protegida en España entre 1991 y ${projectionEnd}, desglosado por estado de protección. En ${lastYear}, último año con datos reales, había ${totalBuilt} viviendas protegidas construidas: ${permanent} con protección permanente, ${protectedNum} con protección temporal, ${maybe} con posibilidad de descalificación voluntaria y ${lost} ya perdidas. A partir de ${lastYear + 1} los valores son una proyección que estima ${projectedPermanent} viviendas con protección permanente, ${projectedProtected} con protección temporal y ${projectedMaybe} que pueden haber sido descalificadas voluntariamente de forma anticipada en ${projectionEnd}.`,
+        `Gráfico de áreas apiladas con la evolución del parque de vivienda protegida en España entre 1991 y ${projectionEnd}, según su estado de protección. En ${lastYear}, último año con datos reales, había ${totalBuilt} viviendas protegidas construidas: ${permanent} con protección permanente, ${protectedNum} con protección temporal, ${maybe} con posibilidad de descalificación voluntaria y ${lost} ya perdidas. A partir de ${lastYear + 1} los valores son una proyección que estima ${projectedPermanent} viviendas con protección permanente, ${projectedProtected} con protección temporal, ${projectedMaybe} que pueden haber sido descalificadas voluntariamente de forma anticipada y ${projectedLost} ya perdidas en ${projectionEnd}.`,
       plan: ({
         lastYear,
         projectionEnd,
@@ -44,7 +45,7 @@ const texts = {
         projectedAutonomico,
         projectedSinInfo,
       }) =>
-        `Gráfico de áreas apiladas con la evolución del parque de vivienda protegida en España entre 1991 y ${projectionEnd}, desglosado por plan. En ${lastYear}, último año con datos reales, había ${totalBuilt} viviendas protegidas construidas: ${estatal} de planes estatales, ${autonomico} de planes autonómicos y ${sinInfo} sin información del plan. A partir de ${lastYear + 1} los valores son una proyección que estima ${projectedEstatal} viviendas provenientes de planes estatales, ${projectedAutonomico} de planes autonómicos y ${projectedSinInfo} sin información del plan en ${projectionEnd}.`,
+        `Gráfico de áreas apiladas con la evolución del parque de vivienda protegida en España entre 1991 y ${projectionEnd}, según su plan. En ${lastYear}, último año con datos reales, había ${totalBuilt} viviendas protegidas construidas: ${estatal} de planes estatales, ${autonomico} de planes autonómicos y ${sinInfo} sin información del plan. A partir de ${lastYear + 1} los valores son una proyección que estima ${projectedEstatal} viviendas provenientes de planes estatales, ${projectedAutonomico} de planes autonómicos y ${projectedSinInfo} sin información del plan en ${projectionEnd}.`,
       promotor: ({
         lastYear,
         projectionEnd,
@@ -60,7 +61,7 @@ const texts = {
         projectedSinAnimoLucro,
         projectedSinInfo,
       }) =>
-        `Gráfico de áreas apiladas con la evolución del parque de vivienda protegida en España entre 1991 y ${projectionEnd}, desglosado por tipo de promoción. En ${lastYear}, último año con datos reales, había ${totalBuilt} viviendas protegidas construidas: ${publico} de promoción pública, ${privado} de promoción privada, ${autopromotor} de autopromoción, ${sinAnimoLucro} de entidades sin ánimo de lucro y ${sinInfo} sin información de la promoción. A partir de ${lastYear + 1} los valores son una proyección que estima ${projectedPublico} viviendas de promoción pública, ${projectedPrivado} de promoción privada, ${projectedAutopromotor} de autopromoción, ${projectedSinAnimoLucro} de entidades sin ánimo de lucro y ${projectedSinInfo} sin información de la promoción en ${projectionEnd}.`,
+        `Gráfico de áreas apiladas con la evolución del parque de vivienda protegida en España entre 1991 y ${projectionEnd}, según su tipo de promoción. En ${lastYear}, último año con datos reales, había ${totalBuilt} viviendas protegidas construidas: ${publico} de promoción pública, ${privado} de promoción privada, ${autopromotor} de autopromoción, ${sinAnimoLucro} de entidades sin ánimo de lucro y ${sinInfo} sin información de la promoción. A partir de ${lastYear + 1} los valores son una proyección que estima ${projectedPublico} viviendas de promoción pública, ${projectedPrivado} de promoción privada, ${projectedAutopromotor} de autopromoción, ${projectedSinAnimoLucro} de entidades sin ánimo de lucro y ${projectedSinInfo} sin información de la promoción en ${projectionEnd}.`,
       tenencia: ({
         lastYear,
         projectionEnd,
@@ -74,7 +75,7 @@ const texts = {
         projectedMixto,
         projectedSinInfo,
       }) =>
-        `Gráfico de áreas apiladas con la evolución del parque de vivienda protegida en España entre 1991 y ${projectionEnd}, desglosado por uso. En ${lastYear}, último año con datos reales, había ${totalBuilt} viviendas protegidas construidas: ${propiedad} en propiedad, ${alquiler} en alquiler, ${mixto} en propiedad o alquiler con opción a compra y ${sinInfo} sin información del uso. A partir de ${lastYear + 1} los valores son una proyección que estima ${projectedPropiedad} viviendas en propiedad, ${projectedAlquiler} en alquiler, ${projectedMixto} en propiedad o alquiler con opción a compra y ${projectedSinInfo} sin información del uso en ${projectionEnd}.`,
+        `Gráfico de áreas apiladas con la evolución del parque de vivienda protegida en España entre 1991 y ${projectionEnd}, según su uso. En ${lastYear}, último año con datos reales, había ${totalBuilt} viviendas protegidas construidas: ${propiedad} en propiedad, ${alquiler} en alquiler, ${mixto} en propiedad o alquiler con opción a compra y ${sinInfo} sin información del uso. A partir de ${lastYear + 1} los valores son una proyección que estima ${projectedPropiedad} viviendas en propiedad, ${projectedAlquiler} en alquiler, ${projectedMixto} en propiedad o alquiler con opción a compra y ${projectedSinInfo} sin información del uso en ${projectionEnd}.`,
     },
 
     // Share/embed texts

@@ -23,11 +23,11 @@
     if (!mobile) {
       const keyYears = new Set([start, PROJECTION_YEAR].filter((y) => ticks.has(y)));
       return [...ticks]
-        .sort((a, b) => a - b)
+        .toSorted((a, b) => a - b)
         .filter((t) => keyYears.has(t) || ![...keyYears].some((k) => k !== t && Math.abs(t - k) < step * 0.6));
     }
 
-    return [...ticks].sort((a, b) => a - b);
+    return [...ticks].toSorted((a, b) => a - b);
   });
 
   function textOpacity(year) {

@@ -167,6 +167,7 @@ export function getAltText(vizLang, { rows, planView }) {
 			projectedPermanent: fmt(p.permanent),
 			projectedProtected: fmt(p.protected),
 			projectedMaybe: fmt(p.maybe),
+			projectedLost: fmt(p.lost),
 		});
 	}
 
