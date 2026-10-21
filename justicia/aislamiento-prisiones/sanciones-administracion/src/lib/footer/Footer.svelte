@@ -153,7 +153,10 @@
 
   .shareModalButton {
     height: 1.25lh !important;
-    aspect-ratio: 1;
+    /* Explicit width instead of aspect-ratio: Safari sizes the button from the
+       svg's percentage width (~200px), squeezing the source text */
+    width: 1.25lh !important;
+    flex: none;
     border-radius: 50px;
     padding: 0.12lh;
     border: none;

@@ -25,6 +25,7 @@ heatmap/
 ├── .oxlintrc.json             # Linting rules (auto-discovered by oxlint)
 ├── knip.json                  # Dead code detection config
 ├── generate-breakpoints.js    # Playwright script for iframe heights
+├── video/story.js             # Video module for the toolkit's story editor (skill video-story)
 │
 ├── src/
 │   ├── main.js                # App mount point
