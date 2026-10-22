@@ -326,7 +326,11 @@ function drawChart(
   const names = domain[1] - domain[0] < 120 ? monthNamesLong : monthNamesShort;
   monthTicks.forEach((tick, month) => {
     const x = xAt(tick);
-    if (visible(x)) ctx.fillText(names[month], x, plotY0 + rowsHeight + 36);
+    if (!visible(x)) return;
+    // Kept inside the side margins when the tick is near an edge
+    const half = ctx.measureText(names[month]).width / 2;
+    const clamped = Math.max(sideMargin + half, Math.min(width - sideMargin - half, x));
+    ctx.fillText(names[month], clamped, plotY0 + rowsHeight + 36);
   });
   ctx.restore();
 }
@@ -707,7 +711,7 @@ function drawSheet(ctx, top, detail, next, yearK, activeDay) {
 // Step times of the demo, from the steps enabled in the scene. The scene's
 // duration follows from them.
 function demoSchedule(scene) {
-  const s = { controlsIn: [0.3, 0.9], fingerIn: [0.9, 1.2] };
+  const s = { controlsIn: [0.3, 0.9] };
   let cursor = 1.2;
   if (scene.switchLevel) {
     s.levelTap = cursor + 1;
@@ -736,8 +740,9 @@ function demoSchedule(scene) {
     s.sheetClose = [s.closeTap, s.closeTap + 0.5];
     cursor = s.closeTap + 1;
   }
-  s.fingerOut = [cursor, cursor + 0.4];
-  s.duration = cursor + 1.2;
+  // The finger leaves after the last tap; then 1.5 s still before the exit
+  s.fingerOut = Math.max(...[s.levelTap, s.rowTap, s.dayTap, s.nextTap, s.closeTap].filter(Number.isFinite)) + 0.4;
+  s.duration = Math.max(cursor, s.fingerOut + 0.6) + 1.6;
   return s;
 }
 
@@ -794,12 +799,15 @@ function renderDemo(kit, { t, scene, data }) {
     drawSheet(ctx, top, detail, next, next ? progress(t, s.nextTap, s.nextTap + 0.35) : 0, activeDay);
   }
 
-  // Finger: from rest to each target in turn, tapping on arrival
+  // Finger: to each target in turn, tapping on arrival
   const pills = pillLayout(ctx);
   const targetPill = pills.find((pill) => pill.level === scene.level);
-  const keyframes = [{ t: 1, at: [760, 1350] }];
+  // The finger comes in from below the frame, under its first target, and
+  // leaves the same way after its last tap
+  const keyframes = [];
   const taps = [];
   const goTo = (tapTime, moveTime, at) => {
+    if (keyframes.length === 0) keyframes.push({ t: 0, at: [at[0], height + 100] });
     keyframes.push({ t: tapTime - moveTime, at: keyframes.at(-1).at }, { t: tapTime - 0.1, at });
     taps.push(tapTime);
   };
@@ -813,12 +821,9 @@ function renderDemo(kit, { t, scene, data }) {
   }
   if (scene.nextYear) goTo(s.nextTap, 0.7, [yearNavX + yearNavGap, sheetTop + sheetHeaderY]);
   if (scene.close) goTo(s.closeTap, 0.7, [closeButtonX, sheetTop + sheetHeaderY]);
-  kit.finger({
-    t,
-    keyframes,
-    taps,
-    alpha: progress(t, ...s.fingerIn) * (1 - progress(t, ...s.fingerOut)),
-  });
+  const last = keyframes.at(-1).at;
+  keyframes.push({ t: s.fingerOut, at: last }, { t: s.fingerOut + 0.6, at: [last[0], height + 100] });
+  kit.finger({ t, keyframes, taps });
 }
 
 // ---------------------------------------------------------------------------
@@ -1029,9 +1034,10 @@ const focus = {
     const s0 = scene.drawing === 'none' ? 0 : scene.drawing === 'fast' ? 1.6 : Math.min(6.8, duration - 4);
     const dim = scene.dim ? progress(t, s0 + 0.2, s0 + 1) : 0;
     const zoomIn = scene.zoom ? progress(t, s0 + 1, s0 + 2.2) : 0;
-    const zoomOut = scene.zoom && scene.zoomOut ? progress(t, duration - 1.7, duration - 0.7) : 0;
+    // Back to the whole year and still for the last 1.5 s
+    const zoomOut = scene.zoom && scene.zoomOut ? progress(t, duration - 2.5, duration - 1.5) : 0;
     const calloutStart = scene.zoom ? s0 + 2.2 : s0 + 1;
-    const calloutOut = scene.zoomOut ? progress(t, duration - 2, duration - 1.7) : 0;
+    const calloutOut = scene.zoomOut ? progress(t, duration - 2.8, duration - 2.5) : 0;
     const domain = interpolateDomain(day.doy, zoomIn * (1 - zoomOut));
 
     drawChart(kit, data, region, {
@@ -1145,10 +1151,11 @@ export default {
       region: 'Asturias',
       drawing: 'fast',
       text: 'Y no solo en verano: {incendios} incendios activos el {fecha}, en pleno invierno.',
-      exit: 'none',
+      zoomOut: false,
       duration: 6.5,
     },
-    { type: 'demo' },
+    // Another view of the chart (controls, detail sheet): a fade, not a cut
+    { type: 'demo', enter: 'fade' },
     {
       type: 'card',
       cardTitle: '¿Cómo han sido\nlos días negros en tu\ncomunidad o provincia?',
