@@ -106,7 +106,7 @@
     <dl class="stats">
       <div class="stat stat--date">
         <dt>{t.lastContract}</dt>
-        <dd>{p.lastContract || noData}</dd>
+        <dd>{t.lastContractById?.[p.id] ?? (p.lastContract || noData)}</dd>
       </div>
       <div class="stat stat--salary">
         {#if !belowMinimumWage}

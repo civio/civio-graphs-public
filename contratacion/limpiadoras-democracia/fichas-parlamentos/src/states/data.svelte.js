@@ -34,6 +34,10 @@ const idByIso = {
   'ES-PV': 'paisvasco',
 };
 
+// Every parliament id, known before the data loads. Any of them is a valid
+// `view`: it shows that single card (e.g. view=galicia for a local embed).
+export const parliamentIds = [...Object.values(idByIso), 'congreso', 'senado'];
+
 // National chambers have no ISO code: their id is the source name as a slug
 // ('Congreso' → 'congreso').
 const slug = (name) =>

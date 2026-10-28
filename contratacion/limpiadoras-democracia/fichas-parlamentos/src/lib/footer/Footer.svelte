@@ -61,12 +61,13 @@
       {salaryNote}
     </p>
     <p>
-      {vizLang.texts.source[view]}
+      <!-- A single-region view shares the regions' source -->
+      {vizLang.texts.source[view] ?? vizLang.texts.source.regions}
 
       <!-- Methodology note -->
       {vizLang.texts.methodology}
       <a
-        href={urlInfo.isCivio ? '#metodologia' : investigationLink}
+        href={urlInfo.isCivio ? '#metodologia' : `${investigationLink}#metodologia`}
         target={urlInfo.isCivio ? '_self' : '_blank'}
         rel={urlInfo.isCivio ? undefined : 'noopener noreferrer'}
       >

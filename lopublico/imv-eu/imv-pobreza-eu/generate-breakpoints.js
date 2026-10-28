@@ -267,7 +267,8 @@ class SmartIframeOptimizer {
 
     for (let i = 1; i < optimized.length; i++) {
       const { width, height } = optimized[i];
-      css += `@container ${this.config.containerName}(min-width:${width}px){#${id}{padding-top:${height}px}}`;
+      // Keep the space before "(": `name(` would parse as a function and drop the rule
+      css += `@container ${this.config.containerName} (min-width:${width}px){#${id}{padding-top:${height}px}}`;
     }
 
     output += `<style>${css}</style>`;

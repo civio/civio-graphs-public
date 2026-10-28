@@ -5,7 +5,7 @@
   import { vizLang } from './states/language.svelte.js';
   import { urlInfo, prefersReducedMotion } from './states/utils.svelte.js';
   import { regionNav } from './states/regionNav.svelte.js';
-  import { data } from './states/data.svelte.js';
+  import { data, parliamentIds } from './states/data.svelte.js';
   import { preloadPhotos } from './states/photos.js';
 
   // Utils
@@ -27,15 +27,13 @@
   // cache so a corrected upload shows up right away.
   const dataUrl = `https://data.civio.es/contratacion/limpiadoras-democracia/fichas-parlamentos/data.csv?t=${Date.now()}`;
 
-  // National chambers: fixed, full-size cards shown by the congreso/senado views.
-  const congreso = $derived(data.parliaments.find((p) => p.id === 'congreso'));
-  const senado = $derived(data.parliaments.find((p) => p.id === 'senado'));
-
-  const views = ['regions', 'congreso', 'senado'];
+  // `view` is 'regions' (the carousel) or a parliament id, which shows that
+  // single card: the national chambers, or one region for a local embed.
   const view = $derived.by(() => {
     const requested = urlInfo.view ?? viewAttr;
-    return views.includes(requested) ? requested : 'regions';
+    return parliamentIds.includes(requested) ? requested : 'regions';
   });
+  const single = $derived(data.parliaments.find((p) => p.id === view));
 
   // Embeds mount by class, so there is no unique element id. We build a stable
   // per-view id for the share modal and the shareable iframe file name.
@@ -88,7 +86,8 @@
   });
 </script>
 
-<div class="cleaners" style={colorVars}>
+<!-- `lang` so screen readers switch voice: the iframe page itself says lang="es" -->
+<div class="cleaners" style={colorVars} lang={vizLang.value}>
   <DirtFilters />
 
   <section class="cards" aria-label={vizLang.texts.widgetLabel}>
@@ -127,15 +126,9 @@
 
       <!-- sr-only comes from civio.es's stylesheet (also used by ShareContainer) -->
       <p class="sr-only" aria-live="polite">{announcement}</p>
-    {:else if view === 'congreso'}
-      {#if congreso}
-        <div class="card-area">
-          <ParliamentCard parliament={congreso} />
-        </div>
-      {/if}
-    {:else if senado}
+    {:else if single}
       <div class="card-area">
-        <ParliamentCard parliament={senado} />
+        <ParliamentCard parliament={single} />
       </div>
     {/if}
   </section>

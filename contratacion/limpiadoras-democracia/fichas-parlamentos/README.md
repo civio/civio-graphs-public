@@ -7,6 +7,7 @@ El gráfico tiene **tres vistas** que se eligen con el atributo `view` en el `<d
 | `regions`  | Carrusel de comunidades autónomas (por defecto) |
 | `congreso` | Ficha del Congreso                              |
 | `senado`   | Ficha del Senado                                |
+| `galicia`… | Ficha suelta de una comunidad (cualquier id de `parliamentIds` en `src/states/data.svelte.js`), para medios locales |
 
 El montaje es **por clase** (`fichas-parlamentos`), no por `id`, para poder poner los tres `<div>` en el mismo artículo. Si se omite el atributo `view`, se muestra `regions`. Pega el `<div>` que corresponda donde quieras cada vista:
 
@@ -53,6 +54,13 @@ Cómo mide el script (`generate-breakpoints.js`):
 ```bash
 npm run iframe -- --views=congreso,senado   # solo algunas vistas (ojo al -- de npm)
 npm run iframe -- --languages=es,en         # otros idiomas (por defecto, los de package.json)
+```
+
+Ficha de Galicia en gallego (para prensa local), que no se genera por defecto:
+
+```bash
+npm run iframe -- --views=galicia --languages=gl
+# → public/iframes/fichas-parlamentos-galicia-gl-responsive.md (…/dist/?view=galicia&lang=gl)
 ```
 
 Hay que volver a generar los iframes si cambia la altura de las fichas: textos, datos o maquetación.
